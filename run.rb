@@ -25,6 +25,8 @@ food = Food.new
 update do
     
     clear
+
+    
     
     unless game.finished?
         snake.move
