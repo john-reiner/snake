@@ -2,6 +2,7 @@ require 'ruby2d'
 
 require_relative "Snake"
 require_relative "Game"
+require_relative "Food"
 
 set background: 'navy'
 set fps_cap: 10
@@ -9,24 +10,36 @@ GRID_SIZE = 20
 GRID_HEIGHT = Window.height / GRID_SIZE
 GRID_WIDTH = Window.width / GRID_SIZE
 
-
-
-
-
 snake = Snake.new
-game = Game.new 
+game = Game.new
+food = Food.new
+
+# foods = []
+
+# 10.times do 
+#     foods.push(Food.new)
+# end
+
 
 
 update do
+    
     clear
+    
     unless game.finished?
         snake.move
+        # foods.each do |food|
+        #     food.draw
+        # end
+        food.draw
     end
+
     snake.draw
     game.draw
 
-    if game.snake_hit_ball?(snake.x, snake.y)
-        game.record_hit
+    if food.snake_eat_food?(snake.x, snake.y)
+        food.ate_food
+        game.increase_score
         snake.grow
     end
 
