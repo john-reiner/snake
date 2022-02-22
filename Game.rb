@@ -4,6 +4,7 @@ class Game
         @ball_x = rand(GRID_WIDTH)
         @ball_y = rand(GRID_HEIGHT)
         @finished = false
+        @level = 1
     end
 
     def draw
@@ -16,6 +17,10 @@ class Game
 
     def increase_score
         @score += 1
+        if @score % 10 == 0
+            @level += 1
+            puts @level
+        end
     end
 
     def finish
@@ -24,6 +29,10 @@ class Game
 
     def finished?
         @finished
+    end
+
+    def level
+        @level
     end
 
     private

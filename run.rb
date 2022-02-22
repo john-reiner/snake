@@ -14,36 +14,41 @@ snake = Snake.new
 game = Game.new
 food = Food.new
 
-# foods = []
+foods = [Food.new]
 
-# 10.times do 
-#     foods.push(Food.new)
-# end
-
+# game level needs to match how many food objects are on the screen
 
 
 update do
-    
+
     clear
 
-    
-    
+
     unless game.finished?
+
+        if foods.count < game.level
+            foods.push(Food.new)
+        end
+
+        foods.each do |food|
+            food.draw
+        end
+
         snake.move
-        # foods.each do |food|
-        #     food.draw
-        # end
-        food.draw
+
     end
 
     snake.draw
     game.draw
 
-    if food.snake_eat_food?(snake.x, snake.y)
-        food.ate_food
-        game.increase_score
-        snake.grow
+    foods.each do |food|
+        if food.snake_eat_food?(snake.x, snake.y)
+            food.ate_food
+            game.increase_score
+            snake.grow
+        end
     end
+
 
     if snake.hit_itself?
         game.finish
