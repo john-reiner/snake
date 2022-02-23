@@ -10,8 +10,4 @@ class Grid
 
     end
 
-    def print_window_specs
-        puts "Grid Size: #{@size}", "Grid Height: #{@height}", "Grid Width: #{@width}"
-    end
-
 end

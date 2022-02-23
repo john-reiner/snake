@@ -7,7 +7,7 @@ require_relative "Header"
 require_relative "Grid"
 
 set background: 'navy'
-set fps_cap: 2
+set fps_cap: 20
 
 grid = Grid.new(20, Window.height, Window.width)
 snake = Snake.new
@@ -59,7 +59,7 @@ on :key_down do |event|
     elsif event.key == 'r'
         snake = Snake.new
         game = Game.new
-        foods = [Food.new]
+        foods = [Food.new(grid.height, grid.width)]
     end
 end
 

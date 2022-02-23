@@ -19,10 +19,12 @@ class Header
             color: 'black',
         )
         if finished
-            Text.new("Game Over! Score: #{score}. Press 'r' to restart", color: "lime", x:10, y:10, size: 20)
+            Text.new("Game Over! Press 'r' to restart", color: "lime", x: 180, y:5, size: 20)
+            Text.new("Score: #{score}", color: "lime", x:10, y:5, size: 20)
+            Text.new("Level: #{level}", color: "lime", x:550, y:5, size: 20)
         else
-            Text.new("Score: #{score}", color: "lime", x:10, y:10, size: 20)
-            Text.new("Level: #{level}", color: "lime", x:300, y:10, size: 20)
+            Text.new("Score: #{score}", color: "lime", x:10, y:5, size: 20)
+            Text.new("Level: #{level}", color: "lime", x:550, y:5, size: 20)
         end
     end
 

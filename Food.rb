@@ -2,7 +2,7 @@ class Food
 
     def initialize(grid_height, grid_width)
         @x = rand(grid_width)
-        @y = rand(grid_height)
+        @y = rand(2..grid_height - 2)
     end
 
     def draw(size)
@@ -15,7 +15,7 @@ class Food
 
     def ate_food(grid_height, grid_width)
         @x = rand(grid_width)
-        @y = rand(grid_height)
+        @y = rand(2..grid_height - 2)
     end
 
 end
