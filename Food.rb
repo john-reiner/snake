@@ -1,21 +1,21 @@
 class Food
 
-    def initialize
-        @food_x = rand(GRID_WIDTH)
-        @food_y = rand(GRID_HEIGHT)
+    def initialize(grid_height, grid_width)
+        @x = rand(grid_width)
+        @y = rand(grid_height)
     end
 
-    def draw
-        Square.new(x: @food_x * GRID_SIZE, y: @food_y * GRID_SIZE, size: GRID_SIZE - 1, color: "red")
+    def draw(size)
+        Square.new(x: @x * size, y: @y * size, size: size - 1, color: "red")
     end
 
     def snake_eat_food?(x, y)
-        @food_x == x && @food_y == y
+        @x == x && @y == y
     end
 
-    def ate_food
-        @food_x = rand(GRID_WIDTH)
-        @food_y = rand(GRID_HEIGHT)
+    def ate_food(grid_height, grid_width)
+        @x = rand(grid_width)
+        @y = rand(grid_height)
     end
 
 end

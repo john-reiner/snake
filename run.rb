@@ -4,21 +4,18 @@ require_relative "Snake"
 require_relative "Game"
 require_relative "Food"
 require_relative "Header"
+require_relative "Grid"
 
 set background: 'navy'
-set fps_cap: 10
-GRID_SIZE = 20  
-GRID_HEIGHT = Window.height/ GRID_SIZE
-GRID_WIDTH = Window.width / GRID_SIZE
+set fps_cap: 2
 
+grid = Grid.new(20, Window.height, Window.width)
 snake = Snake.new
 game = Game.new
-food = Food.new
 
-foods = [Food.new]
-header = Header.new
-# game level needs to match how many food objects are on the screen
-puts Window.height
+foods = [Food.new(grid.height, grid.width)]
+header = Header.new(grid.size, 2)
+grid.print_window_specs
 
 update do
 
@@ -28,20 +25,20 @@ update do
 
     unless game.finished
         if foods.count < game.level
-            foods.push(Food.new)
+            foods.push(Food.new(grid.height, grid.width))
         end
         foods.each do |food|
-            food.draw
+            food.draw(grid.size)
         end
-        snake.move
+        snake.move(grid.height, grid.width, header.size)
     end
 
-    snake.draw
+    snake.draw(grid.size)
     # game.draw
 
     foods.each do |food|
         if food.snake_eat_food?(snake.x, snake.y)
-            food.ate_food
+            food.ate_food(grid.height, grid.width)
             game.increase_score
             snake.grow
         end

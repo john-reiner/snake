@@ -8,13 +8,13 @@ class Snake
         @growing = false
     end
 
-    def draw
+    def draw(size)
         @positions.each do |position|
-            Square.new(x: position[0] * GRID_SIZE, y: position[1] * GRID_SIZE, size: GRID_SIZE - 1, color: "yellow")
+            Square.new(x: position[0] * size, y: position[1] * size, size: size - 1, color: "yellow")
         end
     end
 
-    def move
+    def move(grid_height, grid_width, header_size)
         
         if !@growing
             @positions.shift
@@ -22,13 +22,13 @@ class Snake
         
         case @direction
         when 'down'
-            @positions.push(new_coordinates(head[0], head[1] + 1))
+            @positions.push(new_coordinates(head[0], head[1] + 1, grid_height, grid_width, header_size))
         when 'up'
-            @positions.push(new_coordinates(head[0], head[1] - 1))
+            @positions.push(new_coordinates(head[0], head[1] - 1, grid_height, grid_width, header_size))
         when 'left'
-            @positions.push(new_coordinates(head[0] - 1, head[1]))
+            @positions.push(new_coordinates(head[0] - 1, head[1], grid_height, grid_width, header_size))
         when 'right'
-            @positions.push(new_coordinates(head[0] + 1, head[1]))
+            @positions.push(new_coordinates(head[0] + 1, head[1], grid_height, grid_width, header_size))
         end
 
         @growing = false
@@ -62,8 +62,14 @@ class Snake
 
     private
 
-    def new_coordinates(x, y)
-        [x % GRID_WIDTH, y % GRID_HEIGHT]
+    def new_coordinates(x, y, grid_height, grid_width, header_size)
+        if y < header_size
+            [x % grid_width, grid_height - 1]
+        elsif y >= grid_height
+            [x % grid_width, header_size]
+        else
+            [x % grid_width, y % grid_height]
+        end
     end
 
     def head

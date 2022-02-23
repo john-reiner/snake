@@ -1,9 +1,13 @@
 class Header
 
-    def initialize
+    attr_reader :size
+
+    def initialize(grid_size, size)
+
         @x = 0
         @y = 0
-        @height = GRID_SIZE * 2
+        @size = size
+        @height = grid_size * @size
 
     end
 
