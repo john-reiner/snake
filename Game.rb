@@ -1,4 +1,7 @@
 class Game
+
+    attr_reader :level
+
     def initialize
         @score = 0
         @ball_x = rand(GRID_WIDTH)
@@ -8,7 +11,12 @@ class Game
     end
 
     def draw
-        Text.new(text_message, color: "blue", x:10, y:10, size: 20)
+        if finished?
+            Text.new("Game Over! Score: #{@score}. Press 'r' to restart", color: "blue", x:10, y:10, size: 20)
+        else
+            Text.new("Score: #{@score}", color: "blue", x:10, y:10, size: 20)
+            Text.new("Level: #{@level}", color: "blue", x:300, y:10, size: 20)
+        end
     end
 
     def snake_hit_ball?(x, y)
@@ -19,7 +27,6 @@ class Game
         @score += 1
         if @score % 10 == 0
             @level += 1
-            puts @level
         end
     end
 
@@ -31,15 +38,15 @@ class Game
         @finished
     end
 
-    def level
-        @level
-    end
+    # def level
+    #     @level
+    # end
 
     private
 
     def text_message
         if finished?
-            "Game Over: Score: #{@score}. Press 'r' to restart"
+            "Game Over! Score: #{@score}. Press 'r' to restart"
         else
             "Score: #{@score}"
         end

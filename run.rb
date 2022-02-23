@@ -3,6 +3,7 @@ require 'ruby2d'
 require_relative "Snake"
 require_relative "Game"
 require_relative "Food"
+require_relative "Header"
 
 set background: 'navy'
 set fps_cap: 10
@@ -15,7 +16,7 @@ game = Game.new
 food = Food.new
 
 foods = [Food.new]
-
+header = Header.new
 # game level needs to match how many food objects are on the screen
 
 
@@ -23,19 +24,16 @@ update do
 
     clear
 
+    header.draw
 
     unless game.finished?
-
         if foods.count < game.level
             foods.push(Food.new)
         end
-
         foods.each do |food|
             food.draw
         end
-
         snake.move
-
     end
 
     snake.draw
@@ -64,6 +62,7 @@ on :key_down do |event|
     elsif event.key == 'r'
         snake = Snake.new
         game = Game.new
+        foods = [Food.new]
     end
 end
 
