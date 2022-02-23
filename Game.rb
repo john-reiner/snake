@@ -1,11 +1,9 @@
 class Game
 
-    attr_reader :level
+    attr_reader :level, :score, :finished
 
     def initialize
         @score = 0
-        @ball_x = rand(GRID_WIDTH)
-        @ball_y = rand(GRID_HEIGHT)
         @finished = false
         @level = 1
     end
@@ -32,10 +30,6 @@ class Game
 
     def finish
         @finished = true
-    end
-
-    def finished?
-        @finished
     end
 
     # def level

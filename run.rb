@@ -8,7 +8,7 @@ require_relative "Header"
 set background: 'navy'
 set fps_cap: 10
 GRID_SIZE = 20  
-GRID_HEIGHT = Window.height / GRID_SIZE
+GRID_HEIGHT = Window.height/ GRID_SIZE
 GRID_WIDTH = Window.width / GRID_SIZE
 
 snake = Snake.new
@@ -18,15 +18,15 @@ food = Food.new
 foods = [Food.new]
 header = Header.new
 # game level needs to match how many food objects are on the screen
-
+puts Window.height
 
 update do
 
     clear
 
-    header.draw
+    header.draw(game.finished, game.level, game.score)
 
-    unless game.finished?
+    unless game.finished
         if foods.count < game.level
             foods.push(Food.new)
         end
@@ -37,7 +37,7 @@ update do
     end
 
     snake.draw
-    game.draw
+    # game.draw
 
     foods.each do |food|
         if food.snake_eat_food?(snake.x, snake.y)
