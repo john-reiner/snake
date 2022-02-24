@@ -15,13 +15,12 @@ game = Game.new
 
 foods = [Food.new(grid.height, grid.width)]
 header = Header.new(grid.size, 2)
-grid.print_window_specs
 
 update do
 
     clear
 
-    header.draw(game.finished, game.level, game.score)
+    header.draw(game.finished, game.level, game.score, game.high_score)
 
     unless game.finished
         if foods.count < game.level
@@ -40,10 +39,10 @@ update do
         if food.snake_eat_food?(snake.x, snake.y)
             food.ate_food(grid.height, grid.width)
             game.increase_score
+            game.check_high_score
             snake.grow
         end
     end
-
 
     if snake.hit_itself?
         game.finish

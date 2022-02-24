@@ -11,7 +11,7 @@ class Header
 
     end
 
-    def draw(finished, level, score)
+    def draw(finished, level, score, high_score)
 
         Rectangle.new(
             x: @x, y: @y,
@@ -23,6 +23,7 @@ class Header
             Text.new("Score: #{score}", color: "lime", x:10, y:5, size: 20)
             Text.new("Level: #{level}", color: "lime", x:550, y:5, size: 20)
         else
+            Text.new("High Score: #{high_score}", color: "lime", x: 180, y:5, size: 20)
             Text.new("Score: #{score}", color: "lime", x:10, y:5, size: 20)
             Text.new("Level: #{level}", color: "lime", x:550, y:5, size: 20)
         end

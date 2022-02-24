@@ -1,20 +1,13 @@
 class Game
 
-    attr_reader :level, :score, :finished
-
+    
+    attr_reader :level, :score, :finished, :high_score
+    
     def initialize
         @score = 0
         @finished = false
         @level = 1
-    end
-
-    def draw
-        if finished?
-            Text.new("Game Over! Score: #{@score}. Press 'r' to restart", color: "blue", x:10, y:10, size: 20)
-        else
-            Text.new("Score: #{@score}", color: "blue", x:10, y:10, size: 20)
-            Text.new("Level: #{@level}", color: "blue", x:300, y:10, size: 20)
-        end
+        @high_score = File.read("score.txt")
     end
 
     def snake_hit_ball?(x, y)
@@ -32,9 +25,12 @@ class Game
         @finished = true
     end
 
-    # def level
-    #     @level
-    # end
+    def check_high_score
+        if @score > @high_score.to_i
+            @high_score = @score 
+            File.write("score.txt", @high_score)
+        end
+    end
 
     private
 
