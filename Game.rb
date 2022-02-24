@@ -1,8 +1,7 @@
 class Game
 
-    
     attr_reader :level, :score, :finished, :high_score
-    
+
     def initialize
         @score = 0
         @finished = false
